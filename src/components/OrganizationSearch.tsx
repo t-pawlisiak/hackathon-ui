@@ -7,16 +7,18 @@ interface Organization {
 }
 
 const mockOrganizations = (inputValue: string) => {
-  const chars = inputValue.slice(0, 12);
+  const chars = inputValue.slice(0, 6);  // Get the first 6 characters
   const organizations = [];
+  const suffixLength = 6 - chars.length;
 
   for (let i = 0; i < 10; i++) {
+    const randomSuffix = (Math.random().toString().substr(2, suffixLength));
     organizations.push({
-      id: chars + Math.random() * (12 - chars.length),
+      id: chars + randomSuffix,
       name: `Organization ${i}`,
     });
   }
-
+  console.log(organizations);
   return organizations;
 };
 
