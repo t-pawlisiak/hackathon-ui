@@ -1,0 +1,8 @@
+POST /organizations
+Payload: { id: number; }
+
+Response:
+{
+  id: number;
+  name: string;
+}[];
