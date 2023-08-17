@@ -3,12 +3,17 @@
   background-color: grey;
 }
 
+
 .wrapper {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100vw;
+  height: 100vh;
   align-items: center;
   justify-content: center;
 }
 
+.prompt-sender__form {
+  display: flex;
+  flex-direction: column;
+}

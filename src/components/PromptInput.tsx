@@ -14,8 +14,8 @@ const PromptSender: React.FC = () => {
   };
 
   return (
-    <div className="prompt_sender">
-      <form onSubmit={handleSubmit}>
+    <div>
+      <form onSubmit={handleSubmit} className="prompt-sender__form">
         <textarea
           value={prompt}
           onChange={handleInputChange}
