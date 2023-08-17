@@ -38,7 +38,7 @@ const IndustrySelect: React.FC = () => {
   ];
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+    <FormControl fullWidth size="small">
       <InputLabel>Select an industry...</InputLabel>
       <Select
         value={industry}

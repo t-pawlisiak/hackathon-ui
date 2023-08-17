@@ -3,17 +3,24 @@
   background-color: grey;
 }
 
-
-.wrapper {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  align-items: center;
-  justify-content: center;
+.submit-button {
+  margin-top: 16px !important;
 }
 
-.prompt-sender__form {
-  display: flex;
-  flex-direction: column;
+.prompt-suggestions {
+  padding: 8px;
+}
+
+.prompt-suggestions h5 {
+  margin-bottom: 8px;
+}
+
+.prompt-suggestions ul {
+  margin: 8px 0;
+  padding-left: 1.5em;
+  list-style: square;
+}
+
+.prompt-suggestions ul li::marker {
+  font-size: 0.75em;
 }
