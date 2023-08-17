@@ -1,20 +1,30 @@
-import React, { useContext } from 'react';
 import './App.css';
 import OrganizationSearch from './components/OrganizationSearch';
 import PromptInput from './components/PromptInput';
 import { ConfigProvider } from './components/ConfigProvider';
 import { WorkspaceSearch } from './components/WorkspaceSearch';
 import IndustrySelect from './components/IndustrySelect';
+import { Container, Grid } from '@mui/material';
 
 function App() {
   return (
     <ConfigProvider>
-      <div className="wrapper">
-        <OrganizationSearch />
-        <WorkspaceSearch />
-        <IndustrySelect/>
-        <PromptInput />
-      </div>
+      <Container maxWidth="md" className="wrapper">
+        <Grid container spacing={2}>
+          <Grid item xs={4}>
+            <OrganizationSearch />
+          </Grid>
+          <Grid item xs={4}>
+            <WorkspaceSearch />
+          </Grid>
+          <Grid item xs={4}>
+            <IndustrySelect/>
+          </Grid>
+          <Grid item xs={12}>
+            <PromptInput />
+          </Grid>
+        </Grid>
+      </Container>
     </ConfigProvider>
   );
 }

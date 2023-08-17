@@ -35,7 +35,7 @@ const PromptSuggestions: React.FC = () => {
   const filteredSuggestions = suggestions.filter(suggestion => suggestion !== prompt && suggestion.toLowerCase().includes(prompt.toLowerCase())).slice(0, 5);
 
   return (
-    <div>
+    <div className="prompt-suggestions">
       {filteredSuggestions.length > 0 && (
         <Fragment>
           <h5>Choose prompt:</h5>

@@ -18,8 +18,8 @@ const PromptSender: React.FC = () => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 600 }} className="prompt-sender__form">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <FormControl fullWidth>
           <TextField
             value={prompt}
             onChange={handleInputChange}
@@ -27,12 +27,12 @@ const PromptSender: React.FC = () => {
             multiline
             maxRows={6}
           />
-          <br/>
-          <Button type="submit" variant="contained">
+  
+          <Button type="submit" variant="contained" className="submit-button">
             Send Prompt
           </Button>
-        </form>
-      </FormControl>
+        </FormControl>
+      </form>
 
       <PromptSuggestions />
     </div>

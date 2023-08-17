@@ -39,8 +39,23 @@ const OrganizationSearch: React.FC = () => {
       setSearchText(newValue);
 
       if (newValue.length >= 3) {
-        const matchingOrganizations = mockIds(newValue); //await response.json();
-        setSuggestions(matchingOrganizations);
+        try {
+          const reponse = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/organizations', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: newValue }),
+            mode: 'cors',
+          });
+  
+          if (reponse.ok) {
+            const matchingOrganizations = await reponse.json();
+            setSuggestions(matchingOrganizations);
+          }
+        } catch (error) {
+          console.error(error);
+        }
       } else {
         setSuggestions([]);
       }
@@ -48,7 +63,7 @@ const OrganizationSearch: React.FC = () => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 200 }}>
+    <FormControl fullWidth>
       <Autocomplete
         size="small"
         freeSolo

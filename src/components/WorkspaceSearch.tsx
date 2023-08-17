@@ -33,7 +33,7 @@ const WorkspaceSearchComponent: React.FC = () => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 200 }}>
+    <FormControl fullWidth>
       <Autocomplete
         size="small"
         freeSolo
