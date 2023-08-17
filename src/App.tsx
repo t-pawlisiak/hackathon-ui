@@ -11,10 +11,12 @@ function App() {
 
   return (
     <ConfigProvider>
-      <OrganizationSearch />
-      <WorkspaceSearch />
-      <IndustrySelect />
-      <PromptInput />
+      <div className="wrapper">
+        <OrganizationSearch />
+        {workspaceId ? <WorkspaceSearch /> : null}
+        <IndustrySelect/>
+        <PromptInput />
+      </div>
     </ConfigProvider>
   );
 }

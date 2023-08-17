@@ -12,7 +12,7 @@ export const WorkspaceSearch: React.FC = () => {
         type="text"
         value={inputValue}
         onChange={handleInputChange}
-        placeholder="Enter organization ID"
+        placeholder="Enter workspace ID"
       />
     </div>
   );
