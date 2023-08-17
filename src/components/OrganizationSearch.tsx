@@ -32,7 +32,8 @@ const OrganizationSearch: React.FC = () => {
     if (newValue?.length === 6) {
       setOrganizationId(newValue);
 
-      return
+    } else {
+      setOrganizationId('');
     }
 
     if (newValue) {
