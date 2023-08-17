@@ -1,8 +1,11 @@
 POST /organizations
-Payload: { id: number; }
+{
+  id: number;
+}
 
 Response:
 {
   id: number;
   name: string;
 }[];
+
