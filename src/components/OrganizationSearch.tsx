@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Autocomplete, TextField, FormControl } from '@mui/material';
+import { ConfigContext } from './ConfigProvider';
 
 interface Organization {
   id: string;
@@ -18,15 +19,23 @@ const mockOrganizations = (inputValue: string) => {
       name: `Organization ${i}`,
     });
   }
-  console.log(organizations);
+
   return organizations;
 };
 
 const OrganizationSearch: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState<Organization[]>([]);
+  const { setOrganizationId, organizationId } = useContext(ConfigContext);
 
   const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
+    if (newValue?.length === 6) {
+      setOrganizationId(newValue);
+      console.log("Setting org ID:", organizationId);
+
+      return
+    }
+
     if (newValue) {
       setSearchText(newValue);
 
@@ -45,7 +54,7 @@ const OrganizationSearch: React.FC = () => {
         size="small"
         freeSolo
         filterOptions={(x) => x}
-        options={suggestions.map((org) => org.name)}
+        options={suggestions.map((org) => org.id)}
         value={searchText}
         onChange={handleSearchChange}
         renderInput={(params) => (

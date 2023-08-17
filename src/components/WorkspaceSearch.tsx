@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ConfigContext } from "./ConfigProvider";
 
-export const WorkspaceSearch: React.FC = () => {
+const WorkspaceSearchComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
@@ -16,4 +17,14 @@ export const WorkspaceSearch: React.FC = () => {
       />
     </div>
   );
+}
+
+export const WorkspaceSearch = () =>  {
+  const { organizationId } = useContext(ConfigContext);
+
+  if (organizationId) {
+    return <WorkspaceSearchComponent />;
+  }
+
+  return null;
 }
