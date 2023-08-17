@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
+import { ConfigContext } from './ConfigProvider';
 
 const IndustrySelect: React.FC = () => {
-  const [industry, setIndustry] = useState<string | undefined>(undefined);
+
+  const [ input, setInput ] = useState<string>('');
+  const { setIndustry } = useContext(ConfigContext);
 
   const organizationIndustries = [
     { label: 'Arts', value: 'Arts' },
@@ -37,12 +40,19 @@ const IndustrySelect: React.FC = () => {
     { label: 'Other', value: 'Other' }
   ];
 
+  const handleSearchChange = async (newValue: string | null) => {
+    if (newValue) {
+      setInput(newValue);
+      setIndustry(newValue);
+    }
+  };
+
   return (
     <FormControl fullWidth size="small">
       <InputLabel>Select an industry...</InputLabel>
       <Select
-        value={industry}
-        onChange={(e) => setIndustry(e.target.value as string)}
+        value={input}
+        onChange={(e) => handleSearchChange(e.target.value)}
       >
         {organizationIndustries.map((industryOption) => (
           <MenuItem key={industryOption.value} value={industryOption.value}>

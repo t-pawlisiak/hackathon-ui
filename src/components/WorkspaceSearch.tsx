@@ -8,7 +8,7 @@ interface Workspace {
   name: string;
 }
 
-const WorkspaceSearchComponent: React.FC = () => {
+export const WorkspaceSearch: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState<Workspace[]>([]);
   const { setWorkspaceId } = useContext(ConfigContext);
@@ -53,14 +53,4 @@ const WorkspaceSearchComponent: React.FC = () => {
       />
     </FormControl>
   );
-}
-
-export const WorkspaceSearch = () =>  {
-  const { organizationId } = useContext(ConfigContext);
-
-  if (organizationId) {
-    return <WorkspaceSearchComponent />;
-  }
-
-  return null;
 }

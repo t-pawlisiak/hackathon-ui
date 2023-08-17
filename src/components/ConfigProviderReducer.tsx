@@ -22,6 +22,11 @@ export const ConfigProviderReducer = (state: ConfigProviderState, action: Action
         ...state,
         organizationId: action.payload,
       };
+    case 'SET_INDUSTRY':
+      return {
+        ...state,
+        industry: action.payload,
+      };
     default:
       return state;
   }
