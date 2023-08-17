@@ -1,15 +1,15 @@
 import React, { useContext } from 'react';
 import PromptSuggestions from './PromptSuggestions';
 import { FormControl, TextField, Button } from '@mui/material';
-import { ConfigProvider } from './ConfigProvider';
+import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const { prompt, setPrompt } = useContext(ConfigProvider);
-
+  const { setPrompt, prompt } = useContext(ConfigContext);
+  
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
   };
-
+  
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     console.log("Sending the prompt:", prompt);
@@ -33,9 +33,7 @@ const PromptSender: React.FC = () => {
         </form>
       </FormControl>
 
-      <PromptSuggestions
-        prompt={prompt}
-      />
+      <PromptSuggestions />
     </div>
   );
 }

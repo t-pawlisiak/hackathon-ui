@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext, Fragment } from 'react';
+import { ConfigContext } from './ConfigProvider';
+import { Link } from '@mui/material';
 
-const PromptSuggestions: React.FC<{ prompt: string; }> = ({ prompt }) => {
+const PromptSuggestions: React.FC = () => {
+  const { prompt, setPrompt } = useContext(ConfigContext);
+
   const [suggestions, setSuggestions] = useState<string[]>([]);
 
   useEffect(() => {
@@ -28,14 +32,28 @@ const PromptSuggestions: React.FC<{ prompt: string; }> = ({ prompt }) => {
     ]);
   }, []);
 
+  const filteredSuggestions = suggestions.filter(suggestion => suggestion !== prompt && suggestion.toLowerCase().includes(prompt.toLowerCase())).slice(0, 5);
+
   return (
     <div>
-      <h5>Choose prompt:</h5>
-      <ul>
-        {suggestions.filter(suggestion => suggestion.toLowerCase().includes(prompt.toLowerCase())).slice(0, 5).map((suggestion) => (
-          <li key={suggestion}>{suggestion}</li>
-        ))}
-      </ul>
+      {filteredSuggestions.length > 0 && (
+        <Fragment>
+          <h5>Choose prompt:</h5>
+          <ul>
+            {filteredSuggestions.map((suggestion) => (
+              <li key={suggestion}>
+                <Link
+                  component="button"
+                  variant="body2"
+                  onClick={() => setPrompt(suggestion)}
+                >
+                  {suggestion}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Fragment>
+      )}
     </div>
   );
 }
