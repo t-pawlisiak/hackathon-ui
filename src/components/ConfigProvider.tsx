@@ -1,5 +1,5 @@
 import { createContext, useReducer, useMemo, useEffect } from "react";
-import { ConfigProviderReducer } from "./DataProviderReducer";
+import { ConfigProviderReducer } from "./ConfigProviderReducer";
 
 export type Action =
   | { type: 'SET_PROMPT'; payload: string }

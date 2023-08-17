@@ -1,4 +1,4 @@
-import { ConfigProviderState, Action } from "./DataProvider";
+import { ConfigProviderState, Action } from "./ConfigProvider";
 
 export const ConfigProviderReducer = (state: ConfigProviderState, action: Action): ConfigProviderState => {
   switch (action.type) {
