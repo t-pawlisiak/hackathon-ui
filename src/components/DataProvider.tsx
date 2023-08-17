@@ -1,47 +1,36 @@
 import { createContext, useReducer, useMemo, useEffect } from "react";
+import { ConfigProviderReducer } from "./DataProviderReducer";
 
-type Action =
-  | { type: 'SET_PROMPT', payload: string }
-  | { type: 'SET_RESPONSE', payload: string };
+export type Action =
+  | { type: 'SET_PROMPT'; payload: string }
+  | { type: 'SET_RESPONSE'; payload: string }
+  | { type: 'SET_WORKSPACE_ID'; payload: string }
+  | { type: 'SET_ORGANIZATION_ID'; payload: string };
 
-interface ConfigProviderState {
+export interface ConfigProviderState {
   prompt: string;
   response: string;
-}
-
-export const ConfigProviderReducer = (state: ConfigProviderState, action: Action): ConfigProviderState => {
-  switch (action.type) {
-    case 'SET_PROMPT':
-      return {
-        ...state,
-        prompt: action.payload,
-      };
-    case 'SET_RESPONSE':
-      return {
-        ...state,
-        response: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-interface ConfigProviderState {
-  prompt: string;
-  response: string;
+  workspaceId: string;
+  organizationId: string;
   setPrompt: (prompt: string) => void;
   setResponse: (response: string) => void;
+  setWorkspaceId: (workspaceId: string) => void;
+  setOrganizationId: (organizationId: string) => void;
 }
 
-interface ConfigProviderProps {
+export interface ConfigProviderProps {
   children: JSX.Element[];
 }
 
 const initialState: ConfigProviderState = {
   prompt: '',
   response: '',
+  workspaceId: '',
+  organizationId: '',
   setPrompt: () => undefined,
   setResponse: () => undefined,
+  setWorkspaceId: () => undefined,
+  setOrganizationId: () => undefined,
 };
 
 export const ConfigContext = createContext(initialState);
