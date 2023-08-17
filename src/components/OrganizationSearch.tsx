@@ -31,7 +31,6 @@ const OrganizationSearch: React.FC = () => {
   const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
     if (newValue?.length === 6) {
       setOrganizationId(newValue);
-
     } else {
       setOrganizationId('');
     }

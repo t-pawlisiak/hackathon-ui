@@ -16,8 +16,8 @@ const WorkspaceSearchComponent: React.FC = () => {
   const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
     if (newValue?.length === 6) {
       setWorkspaceId(newValue);
-
-      return
+    } else {
+      setWorkspaceId('');
     }
 
     if (newValue) {
