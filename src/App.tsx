@@ -1,16 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './App.css';
 import OrganizationSearch from './components/OrganizationSearch';
+import PromptInput from './components/PromptInput';
+import { ConfigContext, ConfigProvider } from './components/ConfigProvider';
+import { WorkspaceSearch } from './components/WorkspaceSearch';
 import IndustrySelect from './components/IndustrySelect';
 
 function App() {
+  const { workspaceId } = useContext(ConfigContext);
+
   return (
-    <div className="App">
-      <h1>Organization Search</h1>
+    <ConfigProvider>
       <OrganizationSearch />
-      <h1>Industry</h1>
+      <WorkspaceSearch />
       <IndustrySelect />
-    </div>
+      <PromptInput />
+    </ConfigProvider>
   );
 }
 
