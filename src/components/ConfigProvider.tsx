@@ -19,7 +19,7 @@ export interface ConfigProviderState {
 }
 
 export interface ConfigProviderProps {
-  children: JSX.Element[];
+  children: JSX.Element;
 }
 
 const initialState: ConfigProviderState = {
