@@ -42,6 +42,8 @@ export const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element =
     ...state,
     setPrompt: (prompt: string) => dispatch({ type: 'SET_PROMPT', payload: prompt }),
     setResponse: (response: string) => dispatch({ type: 'SET_RESPONSE', payload: response }),
+    setWorkspaceId: (workspaceId: string) => dispatch({ type: 'SET_WORKSPACE_ID', payload: workspaceId }),
+    setOrganizationId: (organizationId: string) => dispatch({ type: 'SET_ORGANIZATION_ID', payload: organizationId })
   }), [state]);
 
   useEffect(() => { console.log(state.prompt); }, [state]);
