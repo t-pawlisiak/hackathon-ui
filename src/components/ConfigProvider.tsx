@@ -37,6 +37,7 @@ export const ConfigContext = createContext(initialState);
 
 export const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element => {
   const [state, dispatch] = useReducer(ConfigProviderReducer, initialState);
+  console.log("ConfigProvider state:", state.organizationId);
 
   const value = useMemo(() => ({
     ...state,
@@ -45,8 +46,6 @@ export const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element =
     setWorkspaceId: (workspaceId: string) => dispatch({ type: 'SET_WORKSPACE_ID', payload: workspaceId }),
     setOrganizationId: (organizationId: string) => dispatch({ type: 'SET_ORGANIZATION_ID', payload: organizationId })
   }), [state]);
-
-  useEffect(() => { console.log(state.prompt); }, [state]);
 
   return (
     <ConfigContext.Provider value={value}>

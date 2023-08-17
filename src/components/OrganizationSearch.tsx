@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Autocomplete, TextField, FormControl } from '@mui/material';
+import { ConfigContext } from './ConfigProvider';
 
 interface Organization {
   id: string;
@@ -7,12 +8,14 @@ interface Organization {
 }
 
 const mockOrganizations = (inputValue: string) => {
-  const chars = inputValue.slice(0, 12);
+  const chars = inputValue.slice(0, 6);  // Get the first 6 characters
   const organizations = [];
+  const suffixLength = 6 - chars.length;
 
   for (let i = 0; i < 10; i++) {
+    const randomSuffix = (Math.random().toString().substr(2, suffixLength));
     organizations.push({
-      id: chars + Math.random() * (12 - chars.length),
+      id: chars + randomSuffix,
       name: `Organization ${i}`,
     });
   }
@@ -23,8 +26,16 @@ const mockOrganizations = (inputValue: string) => {
 const OrganizationSearch: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState<Organization[]>([]);
+  const { setOrganizationId, organizationId } = useContext(ConfigContext);
 
   const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
+    if (newValue?.length === 6) {
+      setOrganizationId(newValue);
+      console.log("Setting org ID:", organizationId);
+
+      return
+    }
+
     if (newValue) {
       setSearchText(newValue);
 
@@ -43,7 +54,7 @@ const OrganizationSearch: React.FC = () => {
         size="small"
         freeSolo
         filterOptions={(x) => x}
-        options={suggestions.map((org) => org.name)}
+        options={suggestions.map((org) => org.id)}
         value={searchText}
         onChange={handleSearchChange}
         renderInput={(params) => (
