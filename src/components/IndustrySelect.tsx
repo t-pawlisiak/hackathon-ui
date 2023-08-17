@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const IndustrySelect: React.FC = () => {
   const [industry, setIndustry] = useState<string | undefined>(undefined);
@@ -37,17 +38,19 @@ const IndustrySelect: React.FC = () => {
   ];
 
   return (
-    <select
-      value={industry}
-      onChange={(e) => setIndustry(e.target.value)}
-    >
-      <option value={undefined}>Select an industry...</option>
-      {organizationIndustries.map((industryOption) => (
-        <option key={industryOption.value} value={industryOption.value}>
-          {industryOption.label}
-        </option>
-      ))}
-    </select>
+    <FormControl sx={{ m: 1, minWidth: 200 }} size="small">
+      <InputLabel>Select an industry...</InputLabel>
+      <Select
+        value={industry}
+        onChange={(e) => setIndustry(e.target.value as string)}
+      >
+        {organizationIndustries.map((industryOption) => (
+          <MenuItem key={industryOption.value} value={industryOption.value}>
+            {industryOption.label}
+          </MenuItem>
+        ))}
+      </Select>
+    </FormControl>
   );
 };
 
