@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
+import PromptSuggestions from './PromptSuggestions';
+import { FormControl, TextField, Button } from '@mui/material';
+import { ConfigProvider } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const [prompt, setPrompt] = useState(''); // To manage the value of the textarea
+  const { prompt, setPrompt } = useContext(ConfigProvider);
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPrompt(event.target.value); // Update the prompt state whenever the textarea value changes
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPrompt(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -15,17 +18,24 @@ const PromptSender: React.FC = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={prompt}
-          onChange={handleInputChange}
-          placeholder="Enter your prompt here..."
-          rows={4}
-          cols={50}
-        />
-        <br />
-        <button type="submit">Send Prompt</button>
-      </form>
+      <FormControl sx={{ m: 1, minWidth: 600 }}>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            value={prompt}
+            onChange={handleInputChange}
+            label="Enter your prompt here..."
+            multiline
+            maxRows={6}
+          />
+          <Button type="submit" variant="contained">
+            Send Prompt
+          </Button>
+        </form>
+      </FormControl>
+
+      <PromptSuggestions
+        prompt={prompt}
+      />
     </div>
   );
 }
