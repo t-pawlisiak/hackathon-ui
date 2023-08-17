@@ -1,6 +1,6 @@
-POST /organizations
+POST /suggestions/organizations
 {
-  id: number;
+  query: number;
 }
 
 Response:
@@ -9,3 +9,39 @@ Response:
   name: string;
 }[];
 
+POST /suggestions/workspaces
+{
+  organization_id: number;
+  query: number;
+}
+
+Response:
+{
+  id: number;
+  name: string;
+}[];
+
+POST /suggestions/prompts
+{
+  query: string;
+}
+
+Response:
+{
+  propmpts: string[];
+}
+
+POST /message
+{
+  organization?: number;
+  wokspace_id?: number;
+  industry?: string;
+  propmpt: string;
+}
+
+Response:
+{
+  key: string;
+  name: string;
+  value: string | number;
+}[];
