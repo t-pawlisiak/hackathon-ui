@@ -18,7 +18,7 @@ const PromptSender: React.FC = () => {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, minWidth: 600 }}>
+      <FormControl sx={{ m: 1, minWidth: 600 }} className="prompt-sender__form">
         <form onSubmit={handleSubmit}>
           <TextField
             value={prompt}
@@ -27,6 +27,7 @@ const PromptSender: React.FC = () => {
             multiline
             maxRows={6}
           />
+          <br/>
           <Button type="submit" variant="contained">
             Send Prompt
           </Button>

@@ -7,8 +7,8 @@ interface Organization {
   name: string;
 }
 
-const mockOrganizations = (inputValue: string) => {
-  const chars = inputValue.slice(0, 6);  // Get the first 6 characters
+export const mockIds = (inputValue: string) => {
+  const chars = inputValue.slice(0, 6);
   const organizations = [];
   const suffixLength = 6 - chars.length;
 
@@ -26,21 +26,20 @@ const mockOrganizations = (inputValue: string) => {
 const OrganizationSearch: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [suggestions, setSuggestions] = useState<Organization[]>([]);
-  const { setOrganizationId, organizationId } = useContext(ConfigContext);
+  const { setOrganizationId } = useContext(ConfigContext);
 
   const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
     if (newValue?.length === 6) {
       setOrganizationId(newValue);
-      console.log("Setting org ID:", organizationId);
-
-      return
+    } else {
+      setOrganizationId('');
     }
 
     if (newValue) {
       setSearchText(newValue);
 
       if (newValue.length >= 3) {
-        const matchingOrganizations = mockOrganizations(newValue); //await response.json();
+        const matchingOrganizations = mockIds(newValue); //await response.json();
         setSuggestions(matchingOrganizations);
       } else {
         setSuggestions([]);
