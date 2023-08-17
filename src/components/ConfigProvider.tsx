@@ -1,4 +1,4 @@
-import { createContext, useReducer, useMemo, useEffect } from "react";
+import { createContext, useReducer, useMemo } from "react";
 import { ConfigProviderReducer } from "./ConfigProviderReducer";
 
 export type Action =
