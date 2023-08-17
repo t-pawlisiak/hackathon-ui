@@ -14,7 +14,7 @@ const PromptSender: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className="prompt_sender">
       <form onSubmit={handleSubmit}>
         <textarea
           value={prompt}

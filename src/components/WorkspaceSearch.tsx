@@ -45,7 +45,7 @@ const WorkspaceSearchComponent: React.FC = () => {
           <TextField
             {...params}
             type="text"
-            label="Enter organization ID"
+            label="Enter workspace ID"
             value={searchText}
             onChange={(e) => handleSearchChange(e, e.target.value)}
           />
