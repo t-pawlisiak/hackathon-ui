@@ -5,7 +5,7 @@ import video from '../assets/Greeting.mp4'
 
 
 export const TableView: React.FC = () => {
-  const { loading } = useContext(ConfigContext);
+  const { response, loading } = useContext(ConfigContext);
 
   useEffect(() => {
     if (loading) {
@@ -15,7 +15,7 @@ export const TableView: React.FC = () => {
   }, [loading]);
 
   return (
-    loading ? (
+    !response.length || loading ? (
       <video
         style={{ width: '100%', height: 'auto' }}
         id="myVideo"
