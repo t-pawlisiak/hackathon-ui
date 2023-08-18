@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { ConfigContext } from './ConfigProvider';
 import ResultsTable from './ResultsTable';
-import video from '../assets/Greeting.mp4'
+import requestVideo from '../assets/Request_in_progress.mp4'
 
 
 export const TableView: React.FC = () => {
@@ -21,7 +21,7 @@ export const TableView: React.FC = () => {
         id="myVideo"
       >
         <source
-          src={video}
+          src={requestVideo}
           type="video/mp4"
         />
       </video>
