@@ -4,7 +4,7 @@ import { FormControl, TextField, Button } from '@mui/material';
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const { organizationId, workspaceId, industry, setPrompt, prompt } = useContext(ConfigContext);
+  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse } = useContext(ConfigContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
@@ -43,8 +43,9 @@ const PromptSender: React.FC = () => {
       });
 
       if (reponse.ok) {
-        console.log(reponse.json());
-        setPrompt('');
+        const results = await reponse.json();
+
+        setResponse(results);
       }
     } catch (error) {
       console.error(error);
