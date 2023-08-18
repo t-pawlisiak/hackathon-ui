@@ -19,7 +19,7 @@ const ResultsTable: React.FC = () => {
           {response.map((result) => (
             <TableRow>
               {Object.keys(result).map((key) => (
-                <TableCell>{result[key]}</TableCell>
+                <TableCell>{ !isNaN(parseInt(result[key])) ? parseInt(result[key]).toFixed(2) : result[key]}</TableCell>
               ))}
             </TableRow>
           ))}
