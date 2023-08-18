@@ -32,6 +32,11 @@ export const ConfigProviderReducer = (state: ConfigProviderState, action: Action
         ...state,
         loading: action.payload,
       };
+    case 'SET_INTERACTION':
+      return {
+        ...state,
+        interaction: action.payload,
+      };
     default:
       return state;
   }

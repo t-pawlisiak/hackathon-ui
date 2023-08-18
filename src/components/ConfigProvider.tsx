@@ -7,7 +7,8 @@ export type Action =
   | { type: 'SET_WORKSPACE_ID'; payload: string }
   | { type: 'SET_ORGANIZATION_ID'; payload: string }
   | { type: 'SET_INDUSTRY'; payload: string }
-  | { type: 'SET_LOADING'; payload: boolean };
+  | { type: 'SET_LOADING'; payload: boolean }
+  | { type: 'SET_INTERACTION'; payload: boolean };
 
 export interface ConfigProviderState {
   prompt: string;
@@ -16,12 +17,14 @@ export interface ConfigProviderState {
   organizationId: string;
   industry: string;
   loading: boolean;
+  interaction: boolean;
   setPrompt: (prompt: string) => void;
   setResponse: (response: { [key: string]: string }[]) => void;
   setWorkspaceId: (workspaceId: string) => void;
   setOrganizationId: (organizationId: string) => void;
   setIndustry: (industry: string) => void;
   setLoading: (loading: boolean) => void;
+  setInteraction: (interaction: boolean) => void;
 }
 
 export interface ConfigProviderProps {
@@ -35,12 +38,14 @@ const initialState: ConfigProviderState = {
   organizationId: '',
   industry: '',
   loading: false,
+  interaction: false,
   setPrompt: () => undefined,
   setResponse: () => undefined,
   setWorkspaceId: () => undefined,
   setOrganizationId: () => undefined,
   setIndustry: () => undefined,
   setLoading: () => undefined,
+  setInteraction: () => undefined,
 };
 
 export const ConfigContext = createContext(initialState);
@@ -56,6 +61,7 @@ export const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element =
     setOrganizationId: (organizationId: string) => dispatch({ type: 'SET_ORGANIZATION_ID', payload: organizationId }),
     setIndustry: (industry: string) => dispatch({ type: 'SET_INDUSTRY', payload: industry }),
     setLoading: (loading: boolean) => dispatch({ type: 'SET_LOADING', payload: loading }),
+    setInteraction: (interaction: boolean) => dispatch({ type: 'SET_INTERACTION', payload: interaction }),
   }), [state]);
 
   return (
