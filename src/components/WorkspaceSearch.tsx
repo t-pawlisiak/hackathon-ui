@@ -7,34 +7,51 @@ interface Workspace {
   name: string;
 }
 
-export const mockIds = (inputValue: string) => {
-  const chars = inputValue.slice(0, 6);
-  const organizations = [];
-  const suffixLength = 6 - chars.length;
+// export const mockIds = (inputValue: string) => {
+//   const chars = inputValue.slice(0, 6);
+//   const organizations = [];
+//   const suffixLength = 6 - chars.length;
 
-  for (let i = 0; i < 10; i++) {
-    const randomSuffix = (Math.random().toString().substr(2, suffixLength));
-    organizations.push({
-      id: chars + randomSuffix,
-      name: `Organization ${i}`,
-    });
-  }
+//   for (let i = 0; i < 10; i++) {
+//     const randomSuffix = (Math.random().toString().substr(2, suffixLength));
+//     organizations.push({
+//       id: chars + randomSuffix,
+//       name: `Organization ${i}`,
+//     });
+//   }
 
-  return organizations;
-};
+//   return organizations;
+// };
 
 export const WorkspaceSearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Workspace[]>([]);
-  const { workspaceId, setWorkspaceId } = useContext(ConfigContext);
+  const { workspaceId, setWorkspaceId, organizationId } = useContext(ConfigContext);
 
   useEffect(() => {
     if (workspaceId.length >= 3) {
-      const matchingWorkspaces = mockIds(workspaceId);
-      setSuggestions(matchingWorkspaces);
+      (async () => {
+        try {
+          const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/workspaces', {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: "feed", organization_id: organizationId }),
+            mode: 'cors',
+          });
+
+          if (response.ok) {
+            const matchingWorkspaces = await response.json();
+            setSuggestions(matchingWorkspaces);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      })();
     } else {
       setSuggestions([]);
     }
-  }, [workspaceId]);
+  }, [workspaceId, organizationId]);
 
   return (
     <FormControl fullWidth>
