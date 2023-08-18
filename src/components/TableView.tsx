@@ -8,13 +8,17 @@ export const TableView: React.FC = () => {
   const { response, loading, interaction } = useContext(ConfigContext);
 
   useEffect(() => {
-    if (loading || interaction) {
-      const video = document.getElementById("myVideo") as HTMLVideoElement;
-      video.play();
-    }
-  }, [loading, interaction]);
+    const play = async () => {
+      if (loading || interaction) {
+        const video = document.getElementById("myVideo") as HTMLVideoElement;
+        await video.querySelector('source')!.setAttribute('src', loading ? requestVideo : greetingVideo);
+        video.load();
+        video.play();
+      }
+    };
 
-  const videoSource = interaction ? greetingVideo : requestVideo;
+    play();
+  }, [loading, interaction]);
 
   return (
     !response.length || loading || interaction ? (
@@ -23,7 +27,7 @@ export const TableView: React.FC = () => {
         id="myVideo"
       >
         <source
-          src={videoSource}
+          src={!loading ? greetingVideo : requestVideo}
           type="video/mp4"
         />
       </video>

@@ -3,7 +3,7 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { ConfigContext } from './ConfigProvider';
 
 export const IndustrySelect: React.FC = () => {
-  const { industry, setIndustry, loading   } = useContext(ConfigContext);
+  const { industry, setIndustry, loading, interaction, setInteraction } = useContext(ConfigContext);
 
   const organizationIndustries = [
     { label: 'Arts', value: 'Arts' },
@@ -47,6 +47,7 @@ export const IndustrySelect: React.FC = () => {
         value={industry}
         disabled={loading}
         onChange={(e) => { setIndustry(e.target.value as string); }}
+        onFocus={() => !interaction ? setInteraction(true) : () => {}}
       >
         {organizationIndustries.map((industryOption) => (
           <MenuItem key={industryOption.value} value={industryOption.value}>

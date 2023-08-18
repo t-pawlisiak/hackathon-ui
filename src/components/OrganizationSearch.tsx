@@ -9,7 +9,7 @@ interface Organization {
 
 export const OrganizationSearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Organization[]>([]);
-  const { organizationId, setOrganizationId, loading, setInteraction } = useContext(ConfigContext);
+  const { organizationId, setOrganizationId, loading, interaction, setInteraction } = useContext(ConfigContext);
 
   useEffect(() => {
     if (organizationId.length >= 3) {
@@ -57,7 +57,7 @@ export const OrganizationSearch: React.FC = () => {
         filterOptions={(x) => x}
         options={suggestions.map((org) => `${org.name} (${org.id})`)}
         value={organizationId}
-        onFocus={() => setInteraction(true)}
+        onFocus={() => !interaction ? setInteraction(true) : () => {}}
         disabled={loading}
         onChange={(event, newValue) => changeHandler(newValue || '')}
         renderInput={(params) => (
