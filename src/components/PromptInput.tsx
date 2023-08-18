@@ -4,12 +4,12 @@ import { FormControl, TextField, Button } from '@mui/material';
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const { organizationId, workspaceId, setPrompt, prompt } = useContext(ConfigContext);
-  
+  const { organizationId, workspaceId, industry, setPrompt, prompt } = useContext(ConfigContext);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
   };
-  
+
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -17,6 +17,7 @@ const PromptSender: React.FC = () => {
       prompt: string;
       organizationId?: string;
       workspaceId?: string;
+      industry?: string;
     } = { prompt };
 
     if (organizationId) {
@@ -27,10 +28,10 @@ const PromptSender: React.FC = () => {
       payload.workspaceId = workspaceId;
     }
 
-    // if (industry) {
-    //   payload.industry = industry;
-    // }
-    
+    if (industry) {
+      payload.industry = industry;
+    }
+
     try {
       const reponse = await fetch('http://Sawomirs-MacBook-Pro.local:3000/messages', {
         method: 'POST',
@@ -61,7 +62,7 @@ const PromptSender: React.FC = () => {
             multiline
             maxRows={6}
           />
-  
+
           <Button type="submit" variant="contained" className="submit-button">
             Send Prompt
           </Button>

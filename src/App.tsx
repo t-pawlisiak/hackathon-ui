@@ -1,9 +1,9 @@
 import './App.css';
-import OrganizationSearch from './components/OrganizationSearch';
+import {OrganizationSearch} from './components/OrganizationSearch';
 import PromptInput from './components/PromptInput';
 import { ConfigProvider } from './components/ConfigProvider';
 import { WorkspaceSearch } from './components/WorkspaceSearch';
-import IndustrySelect from './components/IndustrySelect';
+import { IndustrySelect } from './components/IndustrySelect';
 import { Container, Grid } from '@mui/material';
 
 function App() {

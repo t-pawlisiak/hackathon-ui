@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Autocomplete, TextField, FormControl } from '@mui/material';
 import { ConfigContext } from './ConfigProvider';
 
@@ -7,60 +7,35 @@ interface Organization {
   name: string;
 }
 
-export const mockIds = (inputValue: string) => {
-  const chars = inputValue.slice(0, 6);
-  const organizations = [];
-  const suffixLength = 6 - chars.length;
-
-  for (let i = 0; i < 10; i++) {
-    const randomSuffix = (Math.random().toString().substr(2, suffixLength));
-    organizations.push({
-      id: chars + randomSuffix,
-      name: `Organization ${i}`,
-    });
-  }
-
-  return organizations;
-};
-
-const OrganizationSearch: React.FC = () => {
-  const [searchText, setSearchText] = useState('');
+export const OrganizationSearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Organization[]>([]);
-  const { setOrganizationId } = useContext(ConfigContext);
+  const { organizationId, setOrganizationId } = useContext(ConfigContext);
 
-  const handleSearchChange = async (event: React.ChangeEvent<{}>, newValue: string | null) => {
-    if (newValue?.length === 6) {
-      setOrganizationId(newValue);
-    } else {
-      setOrganizationId('');
-    }
-
-    if (newValue) {
-      setSearchText(newValue);
-
-      if (newValue.length >= 3) {
+  useEffect(() => {
+    if (organizationId.length >= 3) {
+      (async () => {
         try {
-          const reponse = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/organizations', {
+          const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/organizations', {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ query: newValue }),
+            body: JSON.stringify({ query: organizationId }),
             mode: 'cors',
           });
-  
-          if (reponse.ok) {
-            const matchingOrganizations = await reponse.json();
+
+          if (response.ok) {
+            const matchingOrganizations = await response.json();
             setSuggestions(matchingOrganizations);
           }
         } catch (error) {
           console.error(error);
         }
-      } else {
-        setSuggestions([]);
-      }
+      })();
+    } else {
+      setSuggestions([]);
     }
-  };
+  }, [organizationId]);
 
   return (
     <FormControl fullWidth>
@@ -69,20 +44,22 @@ const OrganizationSearch: React.FC = () => {
         freeSolo
         filterOptions={(x) => x}
         options={suggestions.map((org) => org.id)}
-        value={searchText}
-        onChange={handleSearchChange}
+        value={organizationId}
+        onChange={(event, newValue) => {
+          if (newValue !== null) {
+            setOrganizationId(newValue);
+          }
+        }}
         renderInput={(params) => (
           <TextField
             {...params}
             type="text"
             label="Enter organization ID"
-            value={searchText}
-            onChange={(e) => handleSearchChange(e, e.target.value)}
+            value={organizationId}
+            onChange={(e) => setOrganizationId(e.target.value)}
           />
         )}
       />
     </FormControl>
   );
 };
-
-export default OrganizationSearch;
