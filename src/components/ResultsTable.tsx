@@ -8,7 +8,6 @@ const generatePDF = () => {
   const doc = new jsPDF();
   
   autoTable(doc, { html: '#results-table table' });
-  
   doc.save('table.pdf');
 };
 
@@ -38,7 +37,12 @@ const ResultsTable: React.FC = () => {
         </Table>
       </TableContainer>
 
-      <Button onClick={generatePDF} variant="contained" color="primary">
+      <Button
+        onClick={generatePDF}
+        variant="contained"
+        color="primary"
+        style={{ marginTop: '1rem' }}
+      >
         Download PDF
       </Button>
     </div>

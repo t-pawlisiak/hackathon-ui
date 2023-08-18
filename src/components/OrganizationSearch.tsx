@@ -37,20 +37,28 @@ export const OrganizationSearch: React.FC = () => {
     }
   }, [organizationId]);
 
+  const changeHandler = (value: string) => {
+    const start = value.indexOf('(');
+    const end = value.indexOf(')');
+    let id = '';
+    
+    if (start !== -1 && end !== -1 && start < end) {
+      id = value.substring(start + 1, end);
+    } 
+    
+    setOrganizationId(id);
+  }
+
   return (
     <FormControl fullWidth>
       <Autocomplete
         size="small"
         freeSolo
         filterOptions={(x) => x}
-        options={suggestions.map((org) => org.id)}
+        options={suggestions.map((org) => `${org.name} (${org.id})`)}
         value={organizationId}
         disabled={loading}
-        onChange={(event, newValue) => {
-          if (newValue !== null) {
-            setOrganizationId(newValue);
-          }
-        }}
+        onChange={(event, newValue) => changeHandler(newValue || '')}
         renderInput={(params) => (
           <TextField
             {...params}
