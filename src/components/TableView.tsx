@@ -1,20 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { ConfigContext } from './ConfigProvider';
 import ResultsTable from './ResultsTable';
+import video from '../assets/Greeting.mp4'
 
 
 export const TableView: React.FC = () => {
-  const { response } = useContext(ConfigContext);
+  const { loading } = useContext(ConfigContext);
 
-  if (!response.length) {
-    return <video src="../assets/Greeting.mp4" autoPlay loop muted controls style={{ width: '100%', height: 'auto' }} />;
-  }
-
-// if (response.promptSent) {
-//   return <video src="" autoPlay />;
-// }
+  useEffect(() => {
+    if (loading) {
+      const video = document.getElementById("myVideo") as HTMLVideoElement;
+      video.play();
+    }
+  }, [loading]);
 
   return (
+    loading ? (
+      <video
+        style={{ width: '100%', height: 'auto' }}
+        id="myVideo"
+      >
+        <source
+          src={video}
+          type="video/mp4"
+        />
+      </video>
+    ) :
     <ResultsTable/>
   );
 };
