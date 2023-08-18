@@ -6,7 +6,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse, loading, setLoading } = useContext(ConfigContext);
+  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse, loading, setLoading, interaction, setInteraction } = useContext(ConfigContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
@@ -69,6 +69,7 @@ const PromptSender: React.FC = () => {
             multiline
             maxRows={6}
             disabled={loading}
+            onFocus={() => !interaction ? setInteraction(true) : () => {}}
           />
 
           <LoadingButton
@@ -76,6 +77,7 @@ const PromptSender: React.FC = () => {
             variant="contained"
             className="submit-button"
             loading={loading}
+            disabled={!prompt}
           >
             Send Prompt
           </LoadingButton>
