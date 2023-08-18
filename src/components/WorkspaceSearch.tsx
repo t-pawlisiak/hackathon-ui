@@ -7,28 +7,12 @@ interface Workspace {
   name: string;
 }
 
-// export const mockIds = (inputValue: string) => {
-//   const chars = inputValue.slice(0, 6);
-//   const organizations = [];
-//   const suffixLength = 6 - chars.length;
-
-//   for (let i = 0; i < 10; i++) {
-//     const randomSuffix = (Math.random().toString().substr(2, suffixLength));
-//     organizations.push({
-//       id: chars + randomSuffix,
-//       name: `Organization ${i}`,
-//     });
-//   }
-
-//   return organizations;
-// };
-
 export const WorkspaceSearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Workspace[]>([]);
   const { workspaceId, setWorkspaceId, organizationId } = useContext(ConfigContext);
 
   useEffect(() => {
-    if (workspaceId.length >= 3) {
+    if (workspaceId) {
       (async () => {
         try {
           const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/workspaces', {
@@ -53,6 +37,12 @@ export const WorkspaceSearch: React.FC = () => {
     }
   }, [workspaceId, organizationId]);
 
+  useEffect(() => {
+    if (organizationId.length < 5) {
+      setWorkspaceId('');
+    }
+  }, [organizationId]);
+
   return (
     <FormControl fullWidth>
       <Autocomplete
@@ -67,18 +57,19 @@ export const WorkspaceSearch: React.FC = () => {
           }
         }}
         renderInput={(params) => (
-          <TextField
-            {...params}
-            type="text"
-            label="Enter workspace ID"
-            value={workspaceId}
-            onChange={(e) => {
-              const value = e.target.value;
-              if (value.length === 6 || value.length === 0) {
-                setWorkspaceId(value);
-              }
-            }}
-          />
+        <TextField
+          {...params}
+          disabled={organizationId.length < 5}
+          type="text"
+          label="Enter workspace ID"
+          value={workspaceId}
+          onChange={(e) => { setWorkspaceId(e.target.value);}}
+          onKeyDown={(e) => {
+            if (organizationId.length < 5) {
+              e.preventDefault();
+            }
+          }}
+        />
         )}
       />
     </FormControl>
