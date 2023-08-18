@@ -5,6 +5,7 @@ import { ConfigProvider } from './components/ConfigProvider';
 import { WorkspaceSearch } from './components/WorkspaceSearch';
 import { IndustrySelect } from './components/IndustrySelect';
 import { Container, Grid } from '@mui/material';
+import { TableView } from './components/TableView';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <PromptInput />
           </Grid>
         </Grid>
+        <TableView/>
       </Container>
     </ConfigProvider>
   );

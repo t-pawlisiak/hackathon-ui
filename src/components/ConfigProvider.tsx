@@ -42,9 +42,6 @@ export const ConfigContext = createContext(initialState);
 
 export const ConfigProvider = ({ children }: ConfigProviderProps): JSX.Element => {
   const [state, dispatch] = useReducer(ConfigProviderReducer, initialState);
-  console.log("ConfigProvider industry", state.industry);
-  console.log("ConfigProvider org", state.organizationId);
-  console.log("ConfigProvider wrk", state.workspaceId);
 
   const value = useMemo(() => ({
     ...state,
