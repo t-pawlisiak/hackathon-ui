@@ -1,9 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PromptSuggestions from './PromptSuggestions';
-import { FormControl, TextField, Button } from '@mui/material';
+import { FormControl, TextField } from '@mui/material';
+import LoadingButton from '@mui/lab/LoadingButton';
+
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse } = useContext(ConfigContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +36,8 @@ const PromptSender: React.FC = () => {
     }
 
     try {
+      setLoading(true);
+
       const reponse = await fetch('http://Sawomirs-MacBook-Pro.local:3000/messages', {
         method: 'POST',
         headers: {
@@ -46,9 +51,11 @@ const PromptSender: React.FC = () => {
         const results = await reponse.json();
 
         setResponse(results);
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
+      setLoading(false);
     }
   };
 
@@ -62,11 +69,17 @@ const PromptSender: React.FC = () => {
             label="Enter your prompt here..."
             multiline
             maxRows={6}
+            disabled={loading}
           />
 
-          <Button type="submit" variant="contained" className="submit-button">
+          <LoadingButton
+            type="submit"
+            variant="contained"
+            className="submit-button"
+            loading={loading}
+          >
             Send Prompt
-          </Button>
+          </LoadingButton>
         </FormControl>
       </form>
 

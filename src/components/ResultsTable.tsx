@@ -11,7 +11,7 @@ const ResultsTable: React.FC = () => {
         <TableHead>
           <TableRow>
             {Object.keys(response[0]).map((key) => (
-              <TableCell>{key}</TableCell>
+              <TableCell><strong>{key}</strong></TableCell>
             ))}
           </TableRow>
         </TableHead>
