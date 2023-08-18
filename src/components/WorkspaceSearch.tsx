@@ -9,7 +9,7 @@ interface Workspace {
 
 export const WorkspaceSearch: React.FC = () => {
   const [suggestions, setSuggestions] = useState<Workspace[]>([]);
-  const { workspaceId, setWorkspaceId, organizationId } = useContext(ConfigContext);
+  const { workspaceId, setWorkspaceId, organizationId, loading } = useContext(ConfigContext);
 
   useEffect(() => {
     if (workspaceId) {
@@ -51,6 +51,7 @@ export const WorkspaceSearch: React.FC = () => {
         filterOptions={(x) => x}
         options={suggestions.map((ws) => ws.id)}
         value={workspaceId}
+        disabled={organizationId.length < 5 || loading}
         onChange={(event, newValue) => {
           if (newValue !== null) {
             setWorkspaceId(newValue);
@@ -59,7 +60,7 @@ export const WorkspaceSearch: React.FC = () => {
         renderInput={(params) => (
         <TextField
           {...params}
-          disabled={organizationId.length < 5}
+          disabled={organizationId.length < 5 || loading}
           type="text"
           label="Enter workspace ID"
           value={workspaceId}

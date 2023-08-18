@@ -6,8 +6,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse } = useContext(ConfigContext);
+  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse, loading, setLoading } = useContext(ConfigContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);

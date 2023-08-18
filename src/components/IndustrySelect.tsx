@@ -3,7 +3,7 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import { ConfigContext } from './ConfigProvider';
 
 export const IndustrySelect: React.FC = () => {
-  const { industry, setIndustry } = useContext(ConfigContext);
+  const { industry, setIndustry, loading   } = useContext(ConfigContext);
 
   const organizationIndustries = [
     { label: 'Arts', value: 'Arts' },
@@ -45,6 +45,7 @@ export const IndustrySelect: React.FC = () => {
         labelId="industry-select-label"
         label="Select an industry..."
         value={industry}
+        disabled={loading}
         onChange={(e) => { setIndustry(e.target.value as string); }}
       >
         {organizationIndustries.map((industryOption) => (
