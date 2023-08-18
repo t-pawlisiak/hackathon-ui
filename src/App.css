@@ -3,6 +3,10 @@
   background-color: grey;
 }
 
+.wrapper {
+  margin: 40px auto;
+}
+
 .submit-button {
   margin-top: 16px !important;
 }

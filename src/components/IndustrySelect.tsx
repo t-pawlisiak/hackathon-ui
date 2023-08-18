@@ -40,10 +40,12 @@ export const IndustrySelect: React.FC = () => {
 
   return (
     <FormControl fullWidth size="small">
-      <InputLabel shrink={!!industry}>Select an industry...</InputLabel>
+      <InputLabel id="industry-select-label">Select an industry...</InputLabel>
       <Select
-          value={industry}
-          onChange={(e) => { setIndustry(e.target.value as string); }}
+        labelId="industry-select-label"
+        label="Select an industry..."
+        value={industry}
+        onChange={(e) => { setIndustry(e.target.value as string); }}
       >
         {organizationIndustries.map((industryOption) => (
           <MenuItem key={industryOption.value} value={industryOption.value}>
