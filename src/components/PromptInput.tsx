@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import PromptSuggestions from './PromptSuggestions';
 import { FormControl, TextField } from '@mui/material';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -6,11 +6,11 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import { ConfigContext } from './ConfigProvider';
 
 const PromptSender: React.FC = () => {
-  const { organizationId, workspaceId, industry, setPrompt, prompt, setResponse, loading, setLoading, interaction, setInteraction } = useContext(ConfigContext);
+  const { organizationId, workspaceId, industry, setPrompt, prompt, response, setResponse, loading, setLoading, interaction, setInteraction } = useContext(ConfigContext);
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
-  };
+  };  
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -84,7 +84,10 @@ const PromptSender: React.FC = () => {
         </FormControl>
       </form>
 
-      <PromptSuggestions />
+      {!response.length && (
+        <PromptSuggestions />
+      )}
+      
     </div>
   );
 }

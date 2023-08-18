@@ -4,7 +4,12 @@
 }
 
 .wrapper {
-  margin: 40px auto;
+  display: flex !important;
+  flex-direction: column;
+  padding-top: 40px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  min-height: 100vh;
 }
 
 .submit-button {

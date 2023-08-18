@@ -9,7 +9,7 @@ export const TableView: React.FC = () => {
 
   useEffect(() => {
     const play = async () => {
-      if (loading || interaction) {
+      if (!response.length && (loading || interaction)) {
         const video = document.getElementById("myVideo") as HTMLVideoElement;
         await video.querySelector('source')!.setAttribute('src', loading ? requestVideo : greetingVideo);
         video.load();
@@ -21,16 +21,18 @@ export const TableView: React.FC = () => {
   }, [loading, interaction]);
 
   return (
-    !response.length || loading || interaction ? (
-      <video
-        style={{ width: '100%', height: 'auto' }}
-        id="myVideo"
-      >
-        <source
-          src={!loading ? greetingVideo : requestVideo}
-          type="video/mp4"
-        />
-      </video>
+    !response.length ? (
+      <div style={{ justifySelf: 'flex-end', marginTop: 'auto' }}>
+        <video
+          style={{ width: '100%', height: 'auto' }}
+          id="myVideo"
+        >
+          <source
+            src={!loading ? greetingVideo : requestVideo}
+            type="video/mp4"
+          />
+        </video>
+      </div>
     ) :
     <ResultsTable/>
   );
