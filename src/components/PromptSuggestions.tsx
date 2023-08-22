@@ -11,7 +11,7 @@ const PromptSuggestions: React.FC = () => {
     if (suggestions.length !== 0) return;
     (async () => {
       try {
-        const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/prompts', {
+        const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/suggestions/prompts`, {
           method: 'POST',
           headers: { "Content-Type": "application/json", },
           mode: 'cors',

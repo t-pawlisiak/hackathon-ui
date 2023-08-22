@@ -1,0 +1,23 @@
+[
+  "Show me 3 random surveys",
+  "Show me surveys with highest response count",
+  "Show me surveys with highest response count include survey id",
+  "Show me surveys with highest response count include survey id to the report",
+  "Show me organisations with highest response count ",
+  "Show me organisations with highest response count. Group by organisation",
+  "Show me organisations with highest response count. Group by organisation. Include industry",
+  "Show me organisations with highest response count. ",
+  "Show me sum of responses per month for last year",
+  "Show me sum of responses per month for last year. Show organization with highest response count for every month, including its industry.",
+  "Show organisation with highest response count for every month for last year, including its industry.",
+  "Show organisation with highest response count for every month for last year, including its industry. Show organisations with highest count at the top",
+  "Show 10 organisation with highest response count for every month for last year. Include the industry.",
+  "Show 10 organisation with highest response count for every month for last year. Include the industry. Show several organisations for the same month.",
+  "Show me surveys with highest response count ",
+  "Show 10 surveys with highest response count ",
+  "Show 10 org with highest response count ",
+  "Show me 3 organisations whith highest response count for July 2023",
+  "Show me 3 organisations whith highest response count for January 2023",
+  "Show me 3 organisations whith highest response count. Include industry and cuntry",
+  "Show me 3 organisations whith highest response count for every month in this year. Include industry and cuntry"
+]

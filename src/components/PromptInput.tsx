@@ -10,7 +10,7 @@ const PromptSender: React.FC = () => {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPrompt(event.target.value);
-  };  
+  };
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -37,7 +37,7 @@ const PromptSender: React.FC = () => {
     try {
       setLoading(true);
 
-      const reponse = await fetch('http://Sawomirs-MacBook-Pro.local:3000/messages', {
+      const reponse = await fetch(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -70,6 +70,12 @@ const PromptSender: React.FC = () => {
             maxRows={6}
             disabled={loading}
             onFocus={() => !interaction ? setInteraction(true) : () => {}}
+            onKeyDown={e => {
+              if (e.key == "Enter" && !e.shiftKey) {
+                e.preventDefault()
+                handleSubmit(e);
+              }
+            }}
           />
 
           <LoadingButton
@@ -87,7 +93,7 @@ const PromptSender: React.FC = () => {
       {!response.length && (
         <PromptSuggestions />
       )}
-      
+
     </div>
   );
 }

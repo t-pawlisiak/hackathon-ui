@@ -6,7 +6,7 @@ import autoTable from 'jspdf-autotable'
 
 const generatePDF = () => {
   const doc = new jsPDF();
-  
+
   autoTable(doc, { html: '#results-table table' });
   doc.save('table.pdf');
 };
@@ -21,7 +21,7 @@ const ResultsTable: React.FC = () => {
           <TableHead>
             <TableRow>
               {Object.keys(response[0]).map((key) => (
-                <TableCell><strong>{key}</strong></TableCell>
+                <TableCell><strong>{key == "month" ? "Date" : key}</strong></TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -29,7 +29,10 @@ const ResultsTable: React.FC = () => {
             {response.map((result) => (
               <TableRow>
                 {Object.keys(result).map((key) => (
-                  <TableCell>{ !isNaN(parseInt(result[key])) ? parseInt(result[key]).toFixed(2) : result[key]}</TableCell>
+                  <TableCell>{
+
+                  ((`${result[key]}`).indexOf(":") === -1 && !isNaN(parseInt(result[key]) )) ? parseInt(result[key]) :
+                  (result[key] ?? "").replace(/^(202\d-\d\d).*/, (a,b) => b)}</TableCell>
                 ))}
               </TableRow>
             ))}

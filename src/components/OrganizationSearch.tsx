@@ -15,7 +15,7 @@ export const OrganizationSearch: React.FC = () => {
     if (organizationId.length >= 3) {
       (async () => {
         try {
-          const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/organizations', {
+          const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/suggestions/organizations`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
@@ -41,11 +41,11 @@ export const OrganizationSearch: React.FC = () => {
     const start = value.indexOf('(');
     const end = value.indexOf(')');
     let id = '';
-    
+
     if (start !== -1 && end !== -1 && start < end) {
       id = value.substring(start + 1, end);
-    } 
-    
+    }
+
     setOrganizationId(id);
   }
 

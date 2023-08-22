@@ -13,7 +13,7 @@ export const WorkspaceSearch: React.FC = () => {
 
   const fetchWorkspaces = async () => {
     try {
-      const response = await fetch('http://Sawomirs-MacBook-Pro.local:3000/suggestions/workspaces', {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/suggestions/workspaces`, {
         method: 'POST',
         headers: {
           "Content-Type": "application/json",
@@ -41,11 +41,11 @@ export const WorkspaceSearch: React.FC = () => {
     const start = value.indexOf('(');
     const end = value.indexOf(')');
     let id = '';
-    
+
     if (start !== -1 && end !== -1 && start < end) {
       id = value.substring(start + 1, end);
-    } 
-    
+    }
+
     setWorkspaceId(id);
   }
 
